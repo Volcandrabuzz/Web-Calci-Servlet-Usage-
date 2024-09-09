@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-		 xmlns="https://jakarta.ee/xml/ns/jakartaee" 
-		 xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd" 
-		 id="WebApp_ID" 
-		 version="6.0">
-		 
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="https://jakarta.ee/xml/ns/jakartaee" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd" id="WebApp_ID" version="6.0">
   <display-name>Web Calci</display-name>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
@@ -14,16 +9,24 @@
     <welcome-file>default.jsp</welcome-file>
     <welcome-file>default.htm</welcome-file>
   </welcome-file-list>
-  
-  <!-- <servlet>
+  <servlet>
     <description></description>
-    <display-name>MyServlet</display-name>
-    <servlet-name>MyServlet</servlet-name>
-    <servlet-class>MyPackage.MyServlet</servlet-class>
+    <display-name>HistoryServlet</display-name>
+    <servlet-name>HistoryServlet</servlet-name>
+    <servlet-class>HistoryServlet</servlet-class>
   </servlet>
-  
   <servlet-mapping>
-    <servlet-name>MyServlet</servlet-name>
-    <url-pattern>/MyServlet</url-pattern>
-  </servlet-mapping> -->
+    <servlet-name>HistoryServlet</servlet-name>
+    <url-pattern>/HistoryServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>History_Servlet</display-name>
+    <servlet-name>History_Servlet</servlet-name>
+    <servlet-class>MyPackage.HistoryServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>History_Servlet</servlet-name>
+    <url-pattern>/History_Servlet</url-pattern>
+  </servlet-mapping>
 </web-app>

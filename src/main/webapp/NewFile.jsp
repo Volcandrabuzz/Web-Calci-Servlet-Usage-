@@ -4,16 +4,18 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Web Calci</title>
+	<title>Web_Calci</title>
 	<style type="text/css">
 	body {
 		font-size: 30px;
 		text-align: center;
 		background: linear-gradient(to right, #2b40ff, #07121a);
 		overflow: hidden;
+		position: relative;
+		height: 100vh;
 	}
 	
-	h1, h3, h2 {
+	h1, h3, h2, h4 {
 		color: white;
 		margin: 15px;
 	}
@@ -37,27 +39,10 @@
 		transform: scale(1.1);
 	}
 
-	/* Glowing light animation around the input and buttons */
-	@keyframes glowing {
-		0% {
-			box-shadow: 0 0 10px cyan, 0 0 20px blue, 0 0 30px red, 0 0 40px white;
-		}
-		50% {
-			box-shadow: 0 0 20px blue, 0 0 30px red, 0 0 40px white, 0 0 50px cyan;
-		}
-		100% {
-			box-shadow: 0 0 10px cyan, 0 0 20px blue, 0 0 30px red, 0 0 40px white;
-		}
-	}
-
-	input, button {
-		animation: glowing 2s infinite ease-in-out;
-	}
-
 	/* Style for the image */
 	img {
-		width: 20%;
-		height: 20%;
+		width: 15%;
+		height: 15%;
 		margin-top: 20px;
 		border-radius: 50%;
 		transition: transform 0.3s ease;
@@ -66,20 +51,58 @@
 
 	/* Image hover effect */
 	img:hover {
-		-ms-transform: scale(1.2); /* IE 9 */
-		-webkit-transform: scale(1.2); /* Safari 3-8 */
 		transform: scale(1.2);
 		box-shadow: 0 0 30px cyan, 0 0 50px blue, 0 0 70px red, 0 0 90px white;
 	}
+
+	/* Styling the footer buttons */
+	.footer {
+		position: absolute;
+		bottom: 20px;
+		left: 50%;
+		transform: translateX(-50%);
+	}
+
+	.footer button {
+		font-size: 25px;
+		background-color: black;
+		color: white;
+		border: 2px solid white;
+		padding: 10px 20px;
+		margin: 10px;
+		border-radius: 5px;
+		cursor: pointer;
+		box-shadow: 0 0 10px white, 0 0 20px cyan, 0 0 30px blue, 0 0 40px red;
+		transition: all 0.5s ease;
+	}
+
+	.footer button:hover {
+		box-shadow: 0 0 15px cyan, 0 0 25px blue, 0 0 35px red, 0 0 50px white;
+		transform: scale(1.1);
+	}
 	</style>
+
+	<script>
+		// Save answer to localStorage for History
+		function saveAnswerHistory() {
+			let answer = "<%= request.getParameter("ans") != null ? request.getParameter("ans") : "" %>";
+			if (answer !== "") {
+				let history = JSON.parse(localStorage.getItem('calcHistory')) || [];
+				history.push(answer);
+				localStorage.setItem('calcHistory', JSON.stringify(history));
+				window.location.href = "history.jsp"; // Redirect to history page
+			} else {
+				alert("No answer to save!");
+			}
+		}
+	</script>
 </head>
 <body>
 
 	<img alt="" src="images/laugh.gif">
-	<h2>Joke of the Day!</h2>
-	<h3>🤣<%= request.getParameter("joke") != null ? request.getParameter("joke") : "My Jokes Are Finished For Today" %></h3>
+	<h3>Joke of the Day!</h3>
+	<h4>🤣<%= request.getParameter("joke") != null ? request.getParameter("joke") : "My Jokes Are Finished For Today" %></h4>
 	
-
 	<form action="MyServlet">
 		<input name="num1" placeholder="First Number">
 		<input name="num2" placeholder="Second Number">
@@ -89,7 +112,13 @@
 		<button name="bt1" value="4">/</button>
 	</form>
 	
-	<h2>Answer = <%= request.getParameter("ans") != null ? request.getParameter("ans") : "" %>👌</h2>
+	<h3>Answer = <%= request.getParameter("ans") != null ? request.getParameter("ans") : "" %>👌</h3>
+
+	<!-- Footer buttons -->
+	<div class="footer">
+		<button onclick="window.location.href='index.html'">Home</button>
+		<button onclick="saveAnswerHistory()">History</button>
+	</div>
 
 </body>
 </html>
